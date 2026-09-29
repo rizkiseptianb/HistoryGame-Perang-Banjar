@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Penjaga Lembaran: Ujian Sejarah Banjar</title>
+  <meta name="description" content="Petualangan sejarah interaktif menelusuri Perang Banjar." />
+  
+  <!-- Font Klasik dan Elegan -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  
+  <!-- Library Ikon Vektor (FontAwesome) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <link rel="stylesheet" href="./latihan-01.css" />
+</head>
+<body>
+  <!-- Partikel Debu Arsip -->
+  <canvas id="ambient-particles" aria-hidden="true"></canvas>
+  <div class="vignette-overlay" aria-hidden="true"></div>
+
+  <!-- Header Navigasi -->
+  <header class="top-bar">
+    <div class="brand-title">
+      <span aria-hidden="true"><i class="fa-solid fa-khanda"></i></span> KESULTANAN BANJAR
+    </div>
+    <div class="top-actions">
+      <!-- Tombol Lewati Intro -->
+      <button id="btn-skip-intro" class="btn-icon"><i class="fa-solid fa-forward-step"></i> Lewati Intro</button>
+
+      <!-- Tombol Hamburger -->
+      <button id="btn-hamburger" class="btn-icon hamburger-btn" aria-label="Buka Menu Navigasi" aria-expanded="false">
+        <i class="fa-solid fa-bars"></i> Menu
+      </button>
+
+      <!-- Dropdown Menu Hamburger -->
+      <nav id="dropdown-menu" class="dropdown-menu hidden" aria-label="Menu Utama">
+        <button id="btn-gallery" class="menu-item"><i class="fa-solid fa-landmark"></i> Artefak</button>
+        <button id="btn-mute-toggle" class="menu-item"><i class="fa-solid fa-volume-high"></i> Suara: AKTIF</button>
+        <button id="btn-home-modal" class="menu-item"><i class="fa-solid fa-house"></i> Beranda</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="game-viewport">
+    
+    <!-- LAYAR INTRO -->
+    <section id="screen-intro" class="screen-section active" aria-label="Prolog Petualangan">
+      <div class="intro-container">
+        <div class="title-wrapper">
+          <h1 class="game-main-title">PENJAGA LEMBARAN</h1>
+          <h2 class="game-sub-title">UJIAN SEJARAH BANJAR</h2>
+          <div class="ornament-divider">❖ ✦ ❖</div>
+        </div>
+        
+        <div class="dialog-wrapper">
+          <img id="intro-lora-img" src="./assets/lora_idle.png" alt="Lora" class="lora-avatar" />
+          <div class="parchment-card dialog-box" role="region" tabindex="0">
+            <div class="speaker-name">LORA — PEMANDU SEJARAH</div>
+            <p id="intro-dialog-text" class="dialog-text"></p>
+            <div id="intro-dialog-hint" class="dialog-hint">Ketuk untuk melanjutkan...</div>
+            <button id="btn-start-quiz" class="btn-royal hidden">MULAI UJIAN</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LAYAR KUIS -->
+    <section id="screen-quiz" class="screen-section hidden" aria-label="Sesi Ujian">
+      <div class="quiz-container">
+        <header class="quiz-header parchment-card">
+          <div class="quiz-progress-info">
+            <span id="quiz-question-counter" class="info-pill">Soal 1 dari 5</span>
+            <span id="quiz-score-pill" class="info-pill highlight">0 Poin</span>
+          </div>
+          <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+            <div id="progress-fill" class="progress-fill" style="width: 0%;"></div>
+          </div>
+        </header>
+
+        <div class="quiz-arena">
+          <!-- Area Kiri: Soal -->
+          <div class="main-panel">
+            <div class="parchment-card question-card">
+              <div id="question-category" class="category-tag">Kategori</div>
+              <p id="narrative-text" class="narrative-text"></p>
+              <h3 id="question-text" class="question-text">Memuat pertanyaan...</h3>
+            </div>
+            
+            <div id="options-container" class="options-zone" role="group">
+              <!-- Pilihan jawaban di-render melalui JS -->
+            </div>
+
+            <!-- Panel Umpan Balik (Feedback) -->
+            <div id="feedback-panel" class="feedback-panel hidden" role="alert">
+              <h4 id="feedback-title" class="feedback-title"></h4>
+              <p id="feedback-body" class="feedback-body"></p>
+              
+              <div id="artifact-unlock" class="artifact-unlock-box hidden">
+                <span class="artifact-icon" aria-hidden="true"><i class="fa-solid fa-scroll"></i></span>
+                <div>
+                  <div class="artifact-label">Artefak Baru Ditemukan!</div>
+                  <div id="artifact-name" class="artifact-name"></div>
+                </div>
+              </div>
+              
+              <button id="btn-next-action" class="btn-royal">LANJUT</button>
+            </div>
+          </div>
+
+          <!-- Area Kanan: Lora -->
+          <aside class="companion-panel">
+            <img id="companion-lora-sprite" src="./assets/lora_idle.png" alt="Lora" class="lora-avatar-small" />
+            <div class="speech-bubble">
+              <p id="companion-speech-text">Pilihlah jawaban yang paling tepat.</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- LAYAR HASIL -->
+    <section id="screen-results" class="screen-section hidden" aria-label="Hasil Ujian">
+      <div class="results-container parchment-card">
+        <h2 class="results-title">UJIAN SELESAI!</h2>
+        <div class="score-box">
+          <span class="score-label">TOTAL SKOR</span>
+          <span id="result-score-number" class="score-number">0</span>
+        </div>
+        
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span id="result-first-try" class="stat-value">0/5</span>
+            <span class="stat-label">Tepat Percobaan Pertama</span>
+          </div>
+          <div class="stat-item">
+            <span id="result-accuracy" class="stat-value">0%</span>
+            <span class="stat-label">Akurasi</span>
+          </div>
+        </div>
+        
+        <p id="result-narrative-text" class="result-narrative"></p>
+        
+        <div class="results-actions">
+          <button id="btn-restart-quiz" class="btn-royal"><i class="fa-solid fa-rotate-right"></i> MAIN LAGI</button>
+          <button id="btn-view-artifacts-result" class="btn-royal outline"><i class="fa-solid fa-landmark"></i> LIHAT ARTEFAK</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODAL ARTEFAK -->
+    <div id="modal-artifacts" class="modal-overlay hidden" role="dialog" aria-modal="true">
+      <div class="modal-content parchment-card">
+        <h3 class="modal-title">Arsip Artefak Sejarah</h3>
+        <p class="modal-desc">Kumpulkan artefak dengan menjawab pertanyaan secara tepat.</p>
+        <div id="artifacts-grid" class="artifacts-grid">
+          <!-- Artefak di-render melalui JS -->
+        </div>
+        <div class="modal-actions">
+          <button id="btn-close-artifacts" class="btn-royal"><i class="fa-solid fa-xmark"></i> TUTUP</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="./latihan-01.js"></script>
+</body>
+</html>

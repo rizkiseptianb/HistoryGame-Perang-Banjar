@@ -1,0 +1,364 @@
+:root {
+  --dark-ulin: #30231D;
+  --antique-brown: #59402E;
+  --aged-parchment: #D8C49B;
+  --warm-ivory: #F3E8D0;
+  --antique-gold: #C6A15B;
+  --royal-maroon: #782F32;
+  --forest-green: #52664A;
+  --text-dark: #2A1F1A;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background-color: var(--dark-ulin);
+  color: var(--warm-ivory);
+  font-family: 'Lora', serif;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, .brand-title, .btn-royal, .category-tag, .score-number {
+  font-family: 'Cinzel', serif;
+  margin: 0;
+}
+
+.hidden { display: none !important; }
+
+/* Canvas Latar Belakang & Efek Vignette */
+#ambient-particles {
+  position: fixed; top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: -2; pointer-events: none;
+}
+.vignette-overlay {
+  position: fixed; top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: radial-gradient(circle, rgba(0,0,0,0) 40%, rgba(20,10,5,0.85) 100%);
+  z-index: -1; pointer-events: none;
+}
+
+/* Navigasi Atas */
+.top-bar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.8rem 1.5rem;
+  background: rgba(48, 35, 29, 0.95);
+  border-bottom: 1px solid var(--antique-gold);
+  position: fixed; top: 0; width: 100%;
+  z-index: 100; backdrop-filter: blur(4px);
+}
+.brand-title {
+  color: var(--antique-gold);
+  font-weight: 700; font-size: 1.1rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.top-actions {
+  display: flex; gap: 0.5rem; align-items: center; position: relative;
+}
+.btn-icon {
+  background: transparent;
+  color: var(--antique-gold);
+  border: 1px solid var(--antique-brown);
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer; font-family: 'Lora', serif;
+  font-size: 0.9rem; transition: 0.3s;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+}
+.btn-icon:hover {
+  background: var(--antique-gold); color: var(--dark-ulin);
+}
+
+/* Menu Hamburger Dropdown */
+.hamburger-btn {
+  font-weight: bold;
+}
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  background-color: var(--dark-ulin);
+  border: 2px solid var(--antique-gold);
+  border-radius: 6px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  z-index: 110;
+  overflow: hidden;
+  animation: slideDown 0.2s ease-out;
+}
+.menu-item {
+  background: transparent;
+  color: var(--warm-ivory);
+  border: none;
+  border-bottom: 1px solid rgba(198, 161, 91, 0.2);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-family: 'Lora', serif;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.menu-item i {
+  width: 20px; text-align: center; color: var(--antique-gold);
+}
+.menu-item:hover i {
+  color: var(--dark-ulin);
+}
+.menu-item:last-child {
+  border-bottom: none;
+}
+.menu-item:hover, .menu-item:focus {
+  background: var(--antique-gold);
+  color: var(--dark-ulin);
+}
+
+/* Komponen Perkamen Utama */
+.parchment-card {
+  background-color: var(--aged-parchment);
+  color: var(--text-dark);
+  border-radius: 6px;
+  border: 2px solid var(--antique-brown);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  position: relative;
+  padding: 2rem;
+}
+.parchment-card::after {
+  content: ""; position: absolute;
+  top: 4px; left: 4px; right: 4px; bottom: 4px;
+  border: 1px solid rgba(198, 161, 91, 0.4);
+  pointer-events: none; border-radius: 4px;
+}
+
+/* Pengaturan Layar */
+.game-viewport { padding-top: 60px; min-height: 100vh; }
+.screen-section {
+  min-height: calc(100vh - 60px);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 2rem 1rem;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Tombol Aksi */
+.btn-royal {
+  background: var(--antique-brown);
+  color: var(--antique-gold);
+  border: 2px solid var(--antique-gold);
+  padding: 0.8rem 2rem; border-radius: 4px;
+  font-size: 1.1rem; font-weight: 700;
+  cursor: pointer; transition: 0.2s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  display: inline-flex; align-items: center; gap: 0.5rem; justify-content: center;
+}
+.btn-royal:hover, .btn-royal:focus {
+  background: var(--antique-gold);
+  color: var(--dark-ulin); transform: translateY(-2px);
+}
+.btn-royal.outline {
+  background: transparent; color: var(--antique-brown);
+  border-color: var(--antique-brown);
+}
+.btn-royal.outline:hover {
+  background: var(--antique-brown); color: var(--antique-gold);
+}
+
+/* Intro */
+.intro-container {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 2rem; max-width: 800px;
+}
+.title-wrapper { text-align: center; }
+.game-main-title {
+  color: var(--antique-gold);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+.game-sub-title {
+  color: var(--warm-ivory); font-size: clamp(1.2rem, 3vw, 1.8rem);
+  letter-spacing: 2px;
+}
+.ornament-divider {
+  color: var(--antique-gold); margin-top: 1rem; font-size: 1.2rem;
+}
+.dialog-wrapper {
+  display: flex; flex-direction: column; align-items: center; gap: 1rem;
+  width: 100%; max-width: 600px;
+}
+.lora-avatar { max-width: 280px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.6)); }
+.speaker-name {
+  color: var(--antique-brown); font-weight: 700; margin-bottom: 1rem;
+  border-bottom: 1px solid var(--antique-brown); padding-bottom: 0.5rem;
+}
+.dialog-text { font-size: 1.1rem; min-height: 80px; text-align: left; }
+.dialog-hint { font-size: 0.9rem; font-style: italic; opacity: 0.8; margin-bottom: 1rem; }
+
+/* Area Kuis */
+.quiz-container { width: 100%; max-width: 1100px; display: flex; flex-direction: column; gap: 1.5rem; }
+.quiz-header {
+  padding: 1rem 1.5rem; display: flex; flex-direction: column; gap: 1rem;
+}
+.quiz-progress-info { display: flex; justify-content: space-between; font-weight: 600; }
+.highlight { color: var(--royal-maroon); font-size: 1.2rem; }
+.progress-track {
+  width: 100%; height: 10px; background: var(--dark-ulin);
+  border-radius: 5px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; background: var(--antique-gold); transition: width 0.4s ease-in-out;
+}
+
+.quiz-arena {
+  display: grid; grid-template-columns: 1fr 320px; gap: 2rem; align-items: flex-start;
+}
+.category-tag {
+  color: var(--royal-maroon); font-size: 0.9rem; font-weight: 700;
+  text-transform: uppercase; margin-bottom: 0.5rem; text-align: left;
+}
+.narrative-text {
+  font-style: italic; color: #4A3A30; margin-bottom: 1.5rem;
+  padding-left: 1rem; border-left: 3px solid var(--antique-gold); text-align: left;
+}
+.question-text { font-size: 1.3rem; color: var(--dark-ulin); line-height: 1.4; text-align: left; }
+
+/* Pilihan Jawaban - Teks Rata Kiri */
+.options-zone { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; }
+.option-card {
+  background: var(--antique-brown); color: var(--warm-ivory);
+  border: 2px solid var(--antique-gold); padding: 1rem 1.5rem;
+  border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: flex-start; gap: 1rem;
+  font-family: 'Lora', serif; font-size: 1.1rem;
+  transition: all 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  text-align: left; width: 100%;
+}
+.option-card span:last-child {
+  text-align: left;
+  flex: 1;
+}
+.option-card:hover, .option-card:focus { background: var(--dark-ulin); transform: translateX(5px); }
+.option-badge {
+  background: var(--antique-gold); color: var(--dark-ulin); font-family: 'Cinzel', serif;
+  width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; font-weight: bold; flex-shrink: 0;
+}
+.option-card.correct { background: var(--forest-green); border-color: var(--warm-ivory); }
+.option-card.wrong { background: var(--royal-maroon); border-color: var(--warm-ivory); opacity: 0.8; }
+.option-card.disabled { pointer-events: none; }
+
+/* Panel Feedback */
+.feedback-panel {
+  margin-top: 2rem; padding: 1.5rem; border-radius: 6px; text-align: left;
+  animation: slideUp 0.3s ease;
+}
+.feedback-panel.correct-theme {
+  background: rgba(82, 102, 74, 0.15); border: 2px solid var(--forest-green);
+}
+.feedback-panel.wrong-theme {
+  background: rgba(120, 47, 50, 0.15); border: 2px solid var(--royal-maroon);
+}
+.feedback-title { font-size: 1.3rem; margin-bottom: 0.5rem; }
+.correct-theme .feedback-title { color: var(--forest-green); }
+.wrong-theme .feedback-title { color: var(--royal-maroon); }
+.feedback-body { font-size: 1.05rem; margin-bottom: 1.5rem; }
+
+/* Artefak Unlock UI (Diperbarui agar sangat terlihat) */
+.artifact-unlock-box {
+  background: var(--antique-gold); /* Menggunakan warna emas solid agar menonjol */
+  border: 2px solid var(--warm-ivory); /* Garis tepi putih gading terang */
+  padding: 1.2rem; 
+  border-radius: 8px; 
+  display: flex; 
+  align-items: center; 
+  gap: 1.2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0 20px rgba(198, 161, 91, 0.7); /* Efek cahaya menyala (glow) di sekitarnya */
+}
+
+.artifact-icon { 
+  font-size: 2.8rem; 
+  color: var(--dark-ulin); /* Ikon warna cokelat sangat gelap agar kontras */
+  filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));
+}
+
+.artifact-unlock-box > div {
+  text-align: left;
+}
+
+.artifact-label { 
+  font-size: 0.9rem; 
+  color: var(--dark-ulin); 
+  text-transform: uppercase; 
+  font-weight: 900; 
+  letter-spacing: 1px;
+  margin-bottom: 0.2rem;
+}
+
+.artifact-name { 
+  font-family: 'Cinzel', serif; 
+  font-size: 1.5rem; 
+  color: var(--royal-maroon); /* Merah marun terang untuk nama artefak */
+  font-weight: bold; 
+}
+
+/* Lora Companion Panel */
+.companion-panel {
+  display: flex; flex-direction: column; align-items: center; gap: 1rem;
+}
+.lora-avatar-small { width: 100%; max-width: 220px; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5)); }
+.speech-bubble {
+  background: var(--aged-parchment); border: 2px solid var(--antique-brown);
+  padding: 1rem; border-radius: 8px; position: relative; color: var(--text-dark);
+  font-size: 0.95rem; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Hasil Akhir */
+.results-container { text-align: center; max-width: 700px; padding: 3rem 2rem; }
+.score-box { margin: 2rem 0; }
+.score-label { display: block; font-size: 1.1rem; letter-spacing: 2px; }
+.score-number { display: block; font-size: 4rem; color: var(--royal-maroon); }
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+.stat-item { background: rgba(89, 64, 46, 0.1); padding: 1rem; border-radius: 4px; }
+.stat-value { display: block; font-size: 1.5rem; font-weight: bold; font-family: 'Cinzel', serif; }
+.stat-label { font-size: 0.9rem; opacity: 0.8; }
+.results-actions { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;}
+
+/* Modal Artefak */
+.modal-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.85); z-index: 1000;
+  display: flex; align-items: center; justify-content: center; padding: 1rem;
+}
+.modal-content { max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; text-align: center;}
+.artifacts-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0;
+}
+.artifact-card {
+  background: var(--dark-ulin); border: 2px solid var(--antique-gold);
+  color: var(--warm-ivory); padding: 1.5rem 1rem; border-radius: 4px;
+}
+.artifact-card.locked { opacity: 0.6; filter: grayscale(100%); border-color: var(--antique-brown); }
+.artifact-card .icon { font-size: 2.5rem; margin-bottom: 0.5rem; display: block; color: var(--antique-gold); }
+.artifact-card h4 { margin-bottom: 0.5rem; font-size: 1.1rem; }
+.artifact-card p { font-size: 0.85rem; opacity: 0.9; }
+
+/* Responsivitas Mobile-First */
+@media (max-width: 768px) {
+  .quiz-arena { grid-template-columns: 1fr; }
+  .companion-panel { flex-direction: row; align-items: center; }
+  .lora-avatar-small { max-width: 120px; }
+  .speech-bubble { text-align: left; }
+  .top-actions .btn-icon { font-size: 0.8rem; padding: 0.3rem 0.5rem; }
+  .brand-title { font-size: 0.9rem; }
+  .game-main-title { font-size: 2.2rem; }
+  .option-card { font-size: 1rem; padding: 0.8rem 1rem; }
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
