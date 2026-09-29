@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penjaga Lembaran - Sejarah Perang Banjar</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@500;700;900&family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,600;0,800;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons CDN -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="storytelling-01.css">
+</head>
+<body>
+    <!-- Lighting Vignette & Noise overlays -->
+    <div class="vignette-overlay"></div>
+    <div class="noise-texture"></div>
+
+    <!-- Floating Embers Canvas -->
+    <canvas id="embers-canvas"></canvas>
+
+    <!-- Global Static Photo Background -->
+    <div id="global-bg-image" class="global-bg-image"></div>
+
+    <!-- Global Top Navigation Bar -->
+    <header class="global-top-bar">
+        <div class="banjar-seal">
+            <div class="banjar-seal-icon">
+                <i class="ph-fill ph-crown-simple"></i>
+            </div>
+            <div>
+                <div class="seal-text-title">Perang Banjar Story</div>
+                <div class="seal-text-sub">Kasultanan Banjar</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- PHASE 1: INTRO SECTION -->
+    <section id="phase-intro" class="phase">
+        <div class="intro-container">
+            <div class="pucuk-rebung-border"></div>
+            <!-- SVG Pucuk Rebung Ornaments on Corners -->
+            <svg class="pucuk-rebung-corner corner-tl" viewBox="0 0 24 24"><path d="M0,0 L24,0 L0,24 Z"/></svg>
+            <svg class="pucuk-rebung-corner corner-tr" viewBox="0 0 24 24"><path d="M0,0 L24,0 L0,24 Z"/></svg>
+            <svg class="pucuk-rebung-corner corner-bl" viewBox="0 0 24 24"><path d="M0,0 L24,0 L0,24 Z"/></svg>
+            <svg class="pucuk-rebung-corner corner-br" viewBox="0 0 24 24"><path d="M0,0 L24,0 L0,24 Z"/></svg>
+
+            <span class="intro-badge">📜 ARSIP SEJARAH PERANG BANJAR 1859-1866</span>
+
+            <blockquote class="intro-quote">
+                "1859. Api perlawanan membakar bumi Banjarmasin. Darah, cengkih, dan air mata menyatu di Takhta yang retak..."
+            </blockquote>
+
+            <p class="intro-narrative">
+                Di balik riak Sungai Martapura dan rimba Kalimantan yang lebat, tersimpan kisah keberanian Sultan dan Rakyat yang menolak tunduk pada kolonialisme. Lembaran kuno ini menunggu engkau untuk membukanya kembali.
+            </p>
+
+            <button id="btn-explore" class="btn-explore">
+                <span>AYO JELAJAHI CERITA INI</span>
+                <i class="ph-bold ph-scroll"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- PHASE 2: MAIN STORY CARDS -->
+    <section id="phase-main" class="phase hidden">
+        <div class="main-header">
+            <h1>Riwayat Perang Banjar</h1>
+            <div class="main-header-divider">
+                <span></span> ❖ ⚜ ❖ <span></span>
+            </div>
+            <p style="font-family: 'Cinzel', serif; letter-spacing: 2px; color: var(--ink-faded); font-size: 0.9rem; text-shadow: 0 0 5px rgba(255,255,255,0.8);">
+                PILIH LEMBARAN UNTUK MEMBUKA ARSIP
+            </p>
+        </div>
+
+        <div class="cards-container">
+            <!-- Card 1 -->
+            <div class="story-card unlocked" data-id="1">
+                <div class="card-number-badge">LEMBARAN I</div>
+                <i class="ph-duotone ph-crown card-icon"></i>
+                <h2 class="card-title">Tiga Pangeran, Satu Istana yang Retak</h2>
+                <div class="card-status">Terbuka</div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="story-card locked" data-id="2">
+                <div class="card-number-badge">LEMBARAN II</div>
+                <i class="ph-duotone ph-flame card-icon"></i>
+                <h2 class="card-title">Api Perang Meletus di Tahun 1859</h2>
+                <div class="card-status">Menunggu Waktu</div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="story-card locked" data-id="3">
+                <div class="card-number-badge">LEMBARAN III</div>
+                <i class="ph-duotone ph-shield-checkered card-icon"></i>
+                <h2 class="card-title">Pangeran Antasari: Sultan Rakyat, Pahlawan Abadi</h2>
+                <div class="card-status">Menunggu Waktu</div>
+            </div>
+        </div>
+
+<!-- TOMBOL AYO BERJUANG (VERSI EPIK) -->
+        <div id="berjuang-container" class="berjuang-container">
+    <button id="btn-berjuang" class="btn-berjuang" onclick="window.location.href='workflow/latihan-01.html'">
+        <!-- Wadah untuk partikel api -->
+        <div id="button-particles"></div>
+        
+        <div class="btn-content">
+            <!-- Ikon pedang di latar belakang teks -->
+            <i class="ph-fill ph-sword icon-bg"></i>
+            <!-- Teks dengan efek Shimmer & Emboss -->
+            <span class="btn-text">AYO BERJUANG</span>
+        </div>
+    </button>
+</div>
+
+      
+    </section>
+
+    <!-- STORY MODAL OVERLAY -->
+    <div id="story-modal" class="modal-overlay">
+        <div class="modal-frame">
+            <div class="modal-inner-parchment">
+                <!-- Modal Top Header & Visual Progress Bar -->
+                <div class="modal-header-container">
+                    <div class="modal-top-actions">
+                        <button id="btn-modal-back" class="btn-modal-back">
+                            <i class="ph ph-arrow-left"></i> Kembali ke Daftar Lembaran
+                        </button>
+
+                        <div class="modal-header-title-mini" id="modal-mini-title">
+                            Lembaran I — Bagian 1 dari 3
+                        </div>
+                    </div>
+
+                    <!-- ELEGANT VISUAL NODE PROGRESS BAR -->
+                    <div class="visual-progress-wrapper">
+                        <div class="progress-nodes-container">
+                            <div class="progress-track-line"></div>
+                            <div class="progress-track-fill" id="progress-fill" style="width: 0%;"></div>
+
+                            <div class="progress-step-node active" id="node-1">1</div>
+                            <div class="progress-step-node" id="node-2">2</div>
+                            <div class="progress-step-node" id="node-3">3</div>
+                        </div>
+                        <div class="progress-text-label">
+                            <span>Awal Perpecahan</span>
+                            <span id="progress-percent-text">Bagian 1 dari 3</span>
+                            <span>Puncak Perjuangan</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Story Body Content -->
+                <h2 id="modal-chapter-title" class="story-chapter-title">
+                    <!-- Dynamic Title -->
+                </h2>
+
+                <div id="modal-chapter-body" class="story-text-body">
+                    <!-- Dynamic Story Content -->
+                </div>
+
+                <div class="banjar-divider">❖ ⚜ ❖</div>
+
+                <!-- Modal Action Footer -->
+                <div class="modal-action-footer">
+                    <button id="btn-next-chapter" class="btn-next-chapter">
+                        <span>Lanjut ke Lembaran Berikutnya</span>
+                        <i class="ph ph-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- External JavaScript -->
+    <script src="storytelling-01.js"></script>
+</body>
+</html>
